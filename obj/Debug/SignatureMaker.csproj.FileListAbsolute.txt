@@ -1,0 +1,17 @@
+C:\Users\d.troickiy\source\repos\SignatureMaker\bin\Debug\SignatureMaker.exe.config
+C:\Users\d.troickiy\source\repos\SignatureMaker\bin\Debug\SignatureMaker.exe
+C:\Users\d.troickiy\source\repos\SignatureMaker\bin\Debug\SignatureMaker.pdb
+C:\Users\d.troickiy\source\repos\SignatureMaker\obj\Debug\SignatureMaker.csprojAssemblyReference.cache
+C:\Users\d.troickiy\source\repos\SignatureMaker\obj\Debug\SignatureMaker.MainForm.resources
+C:\Users\d.troickiy\source\repos\SignatureMaker\obj\Debug\SignatureMaker.Properties.Resources.resources
+C:\Users\d.troickiy\source\repos\SignatureMaker\obj\Debug\SignatureMaker.csproj.GenerateResource.cache
+C:\Users\d.troickiy\source\repos\SignatureMaker\obj\Debug\SignatureMaker.exe
+C:\Users\d.troickiy\source\repos\SignatureMaker\obj\Debug\SignatureMaker.pdb
+C:\Users\d.troickiy\source\repos\SignatureMaker\obj\Debug\SignatureMaker.XAdES.MainForm.resources
+C:\Users\d.troickiy\source\repos\SignatureMaker\bin\Debug\Microsoft.Xades.dll
+C:\Users\d.troickiy\source\repos\SignatureMaker\bin\Debug\SPS.Crypto.dll
+C:\Users\d.troickiy\source\repos\SignatureMaker\bin\Debug\crypto.dll
+C:\Users\d.troickiy\source\repos\SignatureMaker\obj\Debug\SignatureMaker.csproj.CopyComplete
+C:\Users\d.troickiy\source\repos\SignatureMaker\bin\Debug\CommandLine.dll
+C:\Users\d.troickiy\source\repos\SignatureMaker\bin\Debug\System.Reflection.TypeExtensions.dll
+C:\Users\d.troickiy\source\repos\SignatureMaker\bin\Debug\System.Shim.dll
