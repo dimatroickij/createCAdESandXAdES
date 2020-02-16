@@ -34,32 +34,36 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.SourceFileTextBox = new System.Windows.Forms.TextBox();
             this.saveFileTextBox = new System.Windows.Forms.TextBox();
+            this.SourceFileButton = new System.Windows.Forms.Button();
+            this.saveFilebutton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.SignatureValueIdTextBox = new System.Windows.Forms.TextBox();
+            this.SigningTimeTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.ObjectIdPrefixTextBox = new System.Windows.Forms.TextBox();
             this.SignatureIdTextBox = new System.Windows.Forms.TextBox();
-            this.SigningTimeTextBox = new System.Windows.Forms.TextBox();
-            this.SignatureValueIdTextBox = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.label7 = new System.Windows.Forms.Label();
+            this.TSACheckBox = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.TimestampURITextBox = new System.Windows.Forms.TextBox();
             this.SignatureTimestampIDTextBox = new System.Windows.Forms.TextBox();
-            this.TSACheckBox = new System.Windows.Forms.CheckBox();
             this.SubscribeButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.label9 = new System.Windows.Forms.Label();
             this.CertificateDetailsLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.SourceFileTextBox = new System.Windows.Forms.TextBox();
-            this.SourceFileButton = new System.Windows.Forms.Button();
-            this.saveFilebutton = new System.Windows.Forms.Button();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.SubscribeProgressBar = new System.Windows.Forms.ProgressBar();
+            this.endLabel = new System.Windows.Forms.Label();
+            this.WSDLCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -68,6 +72,7 @@
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // XAdESTRadioButton
@@ -131,14 +136,14 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.77264F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.22736F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49F));
             this.tableLayoutPanel1.Controls.Add(this.SourceFileTextBox, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.saveFileTextBox, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.SourceFileButton, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.saveFilebutton, 2, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 125);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 177);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -147,21 +152,52 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(588, 62);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
+            // SourceFileTextBox
+            // 
+            this.SourceFileTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.SourceFileTextBox.Location = new System.Drawing.Point(158, 5);
+            this.SourceFileTextBox.Name = "SourceFileTextBox";
+            this.SourceFileTextBox.ReadOnly = true;
+            this.SourceFileTextBox.Size = new System.Drawing.Size(377, 20);
+            this.SourceFileTextBox.TabIndex = 8;
+            // 
             // saveFileTextBox
             // 
             this.saveFileTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.saveFileTextBox.Location = new System.Drawing.Point(158, 36);
             this.saveFileTextBox.Name = "saveFileTextBox";
             this.saveFileTextBox.ReadOnly = true;
-            this.saveFileTextBox.Size = new System.Drawing.Size(378, 20);
+            this.saveFileTextBox.Size = new System.Drawing.Size(377, 20);
             this.saveFileTextBox.TabIndex = 7;
+            // 
+            // SourceFileButton
+            // 
+            this.SourceFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.SourceFileButton.Location = new System.Drawing.Point(541, 4);
+            this.SourceFileButton.Name = "SourceFileButton";
+            this.SourceFileButton.Size = new System.Drawing.Size(44, 23);
+            this.SourceFileButton.TabIndex = 9;
+            this.SourceFileButton.Text = "...";
+            this.SourceFileButton.UseVisualStyleBackColor = true;
+            this.SourceFileButton.Click += new System.EventHandler(this.SourceFileButton_Click);
+            // 
+            // saveFilebutton
+            // 
+            this.saveFilebutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.saveFilebutton.Location = new System.Drawing.Point(541, 35);
+            this.saveFilebutton.Name = "saveFilebutton";
+            this.saveFilebutton.Size = new System.Drawing.Size(44, 23);
+            this.saveFilebutton.TabIndex = 10;
+            this.saveFilebutton.Text = "...";
+            this.saveFilebutton.UseVisualStyleBackColor = true;
+            this.saveFilebutton.Click += new System.EventHandler(this.saveFilebutton_Click);
             // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.tableLayoutPanel2);
-            this.groupBox2.Location = new System.Drawing.Point(12, 193);
+            this.groupBox2.Location = new System.Drawing.Point(12, 245);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(588, 94);
             this.groupBox2.TabIndex = 7;
@@ -177,7 +213,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 34.07407F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 65.92593F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 103F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 196F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 197F));
             this.tableLayoutPanel2.Controls.Add(this.SignatureValueIdTextBox, 3, 1);
             this.tableLayoutPanel2.Controls.Add(this.SigningTimeTextBox, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.label3, 0, 0);
@@ -194,43 +230,60 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(576, 66);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
+            // SignatureValueIdTextBox
+            // 
+            this.SignatureValueIdTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.SignatureValueIdTextBox.Location = new System.Drawing.Point(381, 39);
+            this.SignatureValueIdTextBox.Name = "SignatureValueIdTextBox";
+            this.SignatureValueIdTextBox.Size = new System.Drawing.Size(192, 20);
+            this.SignatureValueIdTextBox.TabIndex = 5;
+            this.SignatureValueIdTextBox.Text = "SignatureValueId";
+            // 
+            // SigningTimeTextBox
+            // 
+            this.SigningTimeTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.SigningTimeTextBox.Location = new System.Drawing.Point(381, 6);
+            this.SigningTimeTextBox.Name = "SigningTimeTextBox";
+            this.SigningTimeTextBox.Size = new System.Drawing.Size(192, 20);
+            this.SigningTimeTextBox.TabIndex = 8;
+            // 
             // label3
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 10);
+            this.label3.Location = new System.Drawing.Point(3, 10);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(78, 13);
+            this.label3.Size = new System.Drawing.Size(88, 13);
             this.label3.TabIndex = 0;
             this.label3.Text = "Object Id prefix";
             // 
             // label4
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(15, 43);
+            this.label4.Location = new System.Drawing.Point(3, 43);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 13);
+            this.label4.Size = new System.Drawing.Size(88, 13);
             this.label4.TabIndex = 1;
             this.label4.Text = "Signature Id";
             // 
             // label5
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(295, 10);
+            this.label5.Location = new System.Drawing.Point(278, 10);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 13);
+            this.label5.Size = new System.Drawing.Size(97, 13);
             this.label5.TabIndex = 2;
             this.label5.Text = "Signing time";
             // 
             // label6
             // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(280, 43);
+            this.label6.Location = new System.Drawing.Point(278, 43);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(94, 13);
+            this.label6.Size = new System.Drawing.Size(97, 13);
             this.label6.TabIndex = 3;
             this.label6.Text = "Signature Value Id";
             // 
@@ -239,7 +292,7 @@
             this.ObjectIdPrefixTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.ObjectIdPrefixTextBox.Location = new System.Drawing.Point(97, 6);
             this.ObjectIdPrefixTextBox.Name = "ObjectIdPrefixTextBox";
-            this.ObjectIdPrefixTextBox.Size = new System.Drawing.Size(176, 20);
+            this.ObjectIdPrefixTextBox.Size = new System.Drawing.Size(175, 20);
             this.ObjectIdPrefixTextBox.TabIndex = 4;
             this.ObjectIdPrefixTextBox.Text = "ObjectId-";
             // 
@@ -248,33 +301,16 @@
             this.SignatureIdTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.SignatureIdTextBox.Location = new System.Drawing.Point(97, 39);
             this.SignatureIdTextBox.Name = "SignatureIdTextBox";
-            this.SignatureIdTextBox.Size = new System.Drawing.Size(176, 20);
+            this.SignatureIdTextBox.Size = new System.Drawing.Size(175, 20);
             this.SignatureIdTextBox.TabIndex = 5;
             this.SignatureIdTextBox.Text = "SignatureId";
-            // 
-            // SigningTimeTextBox
-            // 
-            this.SigningTimeTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.SigningTimeTextBox.Location = new System.Drawing.Point(382, 6);
-            this.SigningTimeTextBox.Name = "SigningTimeTextBox";
-            this.SigningTimeTextBox.Size = new System.Drawing.Size(191, 20);
-            this.SigningTimeTextBox.TabIndex = 8;
-            // 
-            // SignatureValueIdTextBox
-            // 
-            this.SignatureValueIdTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.SignatureValueIdTextBox.Location = new System.Drawing.Point(382, 39);
-            this.SignatureValueIdTextBox.Name = "SignatureValueIdTextBox";
-            this.SignatureValueIdTextBox.Size = new System.Drawing.Size(191, 20);
-            this.SignatureValueIdTextBox.TabIndex = 5;
-            this.SignatureValueIdTextBox.Text = "SignatureValueId";
             // 
             // groupBox3
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.tableLayoutPanel3);
-            this.groupBox3.Location = new System.Drawing.Point(12, 293);
+            this.groupBox3.Location = new System.Drawing.Point(12, 345);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(588, 111);
             this.groupBox3.TabIndex = 8;
@@ -303,25 +339,37 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(576, 86);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
-            // label7
+            // TSACheckBox
             // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(10, 8);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(124, 13);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Timestamp Authority URI";
+            this.TSACheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.TSACheckBox.AutoSize = true;
+            this.TSACheckBox.Location = new System.Drawing.Point(3, 63);
+            this.TSACheckBox.Name = "TSACheckBox";
+            this.TSACheckBox.Size = new System.Drawing.Size(139, 17);
+            this.TSACheckBox.TabIndex = 1;
+            this.TSACheckBox.Text = "Добавить в подпись";
+            this.TSACheckBox.UseVisualStyleBackColor = true;
+            this.TSACheckBox.CheckedChanged += new System.EventHandler(this.TSACheckBox_CheckedChanged);
             // 
             // label8
             // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(14, 37);
+            this.label8.Location = new System.Drawing.Point(3, 37);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(116, 13);
+            this.label8.Size = new System.Drawing.Size(139, 13);
             this.label8.TabIndex = 2;
             this.label8.Text = "Signature timestamp ID";
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 8);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(139, 13);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Timestamp Authority URI";
             // 
             // TimestampURITextBox
             // 
@@ -341,22 +389,11 @@
             this.SignatureTimestampIDTextBox.TabIndex = 6;
             this.SignatureTimestampIDTextBox.Text = "SignatureTimeStampId";
             // 
-            // TSACheckBox
-            // 
-            this.TSACheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.TSACheckBox.AutoSize = true;
-            this.TSACheckBox.Location = new System.Drawing.Point(3, 63);
-            this.TSACheckBox.Name = "TSACheckBox";
-            this.TSACheckBox.Size = new System.Drawing.Size(139, 17);
-            this.TSACheckBox.TabIndex = 1;
-            this.TSACheckBox.Text = "Добавить в подпись";
-            this.TSACheckBox.UseVisualStyleBackColor = true;
-            // 
             // SubscribeButton
             // 
             this.SubscribeButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.SubscribeButton.Location = new System.Drawing.Point(12, 410);
+            this.SubscribeButton.Location = new System.Drawing.Point(6, 493);
             this.SubscribeButton.Name = "SubscribeButton";
             this.SubscribeButton.Size = new System.Drawing.Size(588, 57);
             this.SubscribeButton.TabIndex = 9;
@@ -384,9 +421,9 @@
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 1);
+            this.label9.Location = new System.Drawing.Point(3, 27);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(81, 26);
+            this.label9.Size = new System.Drawing.Size(82, 26);
             this.label9.TabIndex = 11;
             this.label9.Text = "Данные сертификата";
             // 
@@ -394,9 +431,9 @@
             // 
             this.CertificateDetailsLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.CertificateDetailsLabel.AutoSize = true;
-            this.CertificateDetailsLabel.Location = new System.Drawing.Point(90, 7);
+            this.CertificateDetailsLabel.Location = new System.Drawing.Point(91, 33);
             this.CertificateDetailsLabel.Name = "CertificateDetailsLabel";
-            this.CertificateDetailsLabel.Size = new System.Drawing.Size(495, 13);
+            this.CertificateDetailsLabel.Size = new System.Drawing.Size(494, 13);
             this.CertificateDetailsLabel.TabIndex = 12;
             // 
             // tableLayoutPanel5
@@ -410,45 +447,59 @@
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(588, 28);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(588, 80);
             this.tableLayoutPanel5.TabIndex = 13;
             // 
-            // SourceFileTextBox
+            // tableLayoutPanel6
             // 
-            this.SourceFileTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.SourceFileTextBox.Location = new System.Drawing.Point(158, 5);
-            this.SourceFileTextBox.Name = "SourceFileTextBox";
-            this.SourceFileTextBox.ReadOnly = true;
-            this.SourceFileTextBox.Size = new System.Drawing.Size(378, 20);
-            this.SourceFileTextBox.TabIndex = 8;
+            this.tableLayoutPanel6.ColumnCount = 3;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.17829F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 86.82171F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 71F));
+            this.tableLayoutPanel6.Controls.Add(this.SubscribeProgressBar, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.endLabel, 2, 0);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(9, 556);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 1;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(588, 29);
+            this.tableLayoutPanel6.TabIndex = 15;
             // 
-            // SourceFileButton
+            // SubscribeProgressBar
             // 
-            this.SourceFileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.SourceFileButton.Location = new System.Drawing.Point(542, 4);
-            this.SourceFileButton.Name = "SourceFileButton";
-            this.SourceFileButton.Size = new System.Drawing.Size(43, 23);
-            this.SourceFileButton.TabIndex = 9;
-            this.SourceFileButton.Text = "...";
-            this.SourceFileButton.UseVisualStyleBackColor = true;
-            this.SourceFileButton.Click += new System.EventHandler(this.SourceFileButton_Click);
+            this.SubscribeProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.SubscribeProgressBar.Location = new System.Drawing.Point(71, 3);
+            this.SubscribeProgressBar.Name = "SubscribeProgressBar";
+            this.SubscribeProgressBar.Size = new System.Drawing.Size(442, 23);
+            this.SubscribeProgressBar.TabIndex = 15;
             // 
-            // saveFilebutton
+            // endLabel
             // 
-            this.saveFilebutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.saveFilebutton.Location = new System.Drawing.Point(542, 35);
-            this.saveFilebutton.Name = "saveFilebutton";
-            this.saveFilebutton.Size = new System.Drawing.Size(43, 23);
-            this.saveFilebutton.TabIndex = 10;
-            this.saveFilebutton.Text = "...";
-            this.saveFilebutton.UseVisualStyleBackColor = true;
-            this.saveFilebutton.Click += new System.EventHandler(this.saveFilebutton_Click);
+            this.endLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.endLabel.AutoSize = true;
+            this.endLabel.Location = new System.Drawing.Point(545, 8);
+            this.endLabel.Name = "endLabel";
+            this.endLabel.Size = new System.Drawing.Size(13, 13);
+            this.endLabel.TabIndex = 16;
+            this.endLabel.Text = "0";
+            // 
+            // WSDLCheckBox
+            // 
+            this.WSDLCheckBox.AutoSize = true;
+            this.WSDLCheckBox.Location = new System.Drawing.Point(12, 462);
+            this.WSDLCheckBox.Name = "WSDLCheckBox";
+            this.WSDLCheckBox.Size = new System.Drawing.Size(165, 17);
+            this.WSDLCheckBox.TabIndex = 16;
+            this.WSDLCheckBox.Text = "Формат файлов для WSDL";
+            this.WSDLCheckBox.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(612, 476);
+            this.ClientSize = new System.Drawing.Size(612, 597);
+            this.Controls.Add(this.WSDLCheckBox);
+            this.Controls.Add(this.tableLayoutPanel6);
             this.Controls.Add(this.tableLayoutPanel5);
             this.Controls.Add(this.tableLayoutPanel4);
             this.Controls.Add(this.SubscribeButton);
@@ -474,7 +525,10 @@
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -511,5 +565,9 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.Button SourceFileButton;
         private System.Windows.Forms.Button saveFilebutton;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.ProgressBar SubscribeProgressBar;
+        private System.Windows.Forms.Label endLabel;
+        private System.Windows.Forms.CheckBox WSDLCheckBox;
     }
 }

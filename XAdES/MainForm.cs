@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
+using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -28,6 +29,7 @@ namespace SignatureMaker.XAdES
             this.XAdESTRadioButton.Checked = true;
             this.SigningTimeTextBox.Text = DateTime.Now.ToString("s");
             this.TSACheckBox.Checked = true;
+            this.WSDLCheckBox.Checked = true;
         }
 
         private void selectCertificate_Click(object sender, EventArgs e)
@@ -113,24 +115,50 @@ namespace SignatureMaker.XAdES
             // Добавить проверку на пустоту всех полей
             if (_certificate != null)
             {
-                if ((SourceFileTextBox.Text != "") && (saveFileTextBox.Text != ""))
+                if (
+                    (SourceFileTextBox.Text != "") && (saveFileTextBox.Text != "") && 
+                    (ObjectIdPrefixTextBox.Text != "") && (SignatureIdTextBox.Text != "") &&
+                    (SigningTimeTextBox.Text != "") && (SignatureValueIdTextBox.Text != "") &&
+                    
+                    (TSACheckBox.Checked && (TimestampURITextBox.Text != "") && (SignatureTimestampIDTextBox.Text != "") || ! TSACheckBox.Checked)
+                    
+                    )
                 {
+                    SubscribeProgressBar.Value = 0;
                     IEnumerable<string> allfiles = Directory.EnumerateFiles(SourceFileTextBox.Text);
-                    foreach (string filename in allfiles)
+                    Thread t = new Thread(new ThreadStart(delegate
                     {
-                        connectFile(filename);
-                        AddCertificateInfoToSignature();
-                        signedFile(filename);
-                    }
-
-                    // выдать сообщение, что подпись создана и очистить поля
+                        foreach (string filename in allfiles)
+                        {
+                            this.Invoke(new ThreadStart(delegate
+                            {
+                                connectFile(filename);
+                                AddCertificateInfoToSignature();
+                                signedFile(filename);
+                                SubscribeProgressBar.Value++;
+                            }));
+                        }
+                        // выдать сообщение, что подпись создана и очистить поля
+                        //MessageBox.Show(
+                        //            "Создание подписи",
+                        //            "Файл подписан",
+                        //            MessageBoxButtons.OK,
+                        //            MessageBoxIcon.Information,
+                        //            MessageBoxDefaultButton.Button1,
+                        //            MessageBoxOptions.DefaultDesktopOnly);
+                    }));
+                    t.Start();
+                    
+                }
+                else
+                {
                     MessageBox.Show(
-                            "Создание подписи",
-                            "Файл подписан",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information,
-                            MessageBoxDefaultButton.Button1,
-                            MessageBoxOptions.DefaultDesktopOnly);
+                    "Заполните все поля!",
+                    "Ошибка при создании подписи",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button1,
+                    MessageBoxOptions.DefaultDesktopOnly);
                 }
             }
             else
@@ -250,8 +278,10 @@ namespace SignatureMaker.XAdES
                 xRoot.RemoveChild(xRoot["ds:Signature"]);
                 string[] paths = filename.Split(new char[] { '\\' });
                 string z = paths[paths.Length - 1].ToString();
-                string zz = saveFileTextBox.Text + "/" + z;
-                _envelopedSignatureXmlDocument.Save(saveFileTextBox.Text + "\\" + z);
+                if (WSDLCheckBox.Checked)
+                    encodeBase64(_envelopedSignatureXmlDocument, saveFileTextBox.Text + "\\", z);
+                else
+                    _envelopedSignatureXmlDocument.Save(saveFileTextBox.Text + "\\" + z);
             }
         }
 
@@ -311,12 +341,42 @@ namespace SignatureMaker.XAdES
             }
         }
 
+        private void encodeBase64(XmlDocument xml, string path, string file)
+        {
+            XmlDocument xDocXAdES = new XmlDocument();
+            XmlDocument xDocXAdESWithSignedReport = new XmlDocument();
+            string XAdES = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:esv=\"http://esv.server.rt.ru\">" +
+                "<soapenv:Header/><soapenv:Body><esv:VerifyXAdES><esv:message>123</esv:message><esv:verifySignatureOnly>false</esv:verifySignatureOnly>" +
+                "</esv:VerifyXAdES></soapenv:Body></soapenv:Envelope>";
+
+            string XAdESWithSignedReport = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:esv=\"http://esv.server.rt.ru\">" +
+                "<soapenv:Header/><soapenv:Body><esv:VerifyXAdESWithSignedReport><esv:message>123</esv:message><esv:verifySignatureOnly>false</esv:verifySignatureOnly>" +
+                "</esv:VerifyXAdESWithSignedReport></soapenv:Body></soapenv:Envelope>";
+
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(xml.InnerXml);
+
+            xDocXAdES.LoadXml(XAdES);
+            XmlElement xRootXAdES = xDocXAdES.DocumentElement;
+            xRootXAdES["soapenv:Body"]["esv:VerifyXAdES"]["esv:message"].InnerXml = System.Convert.ToBase64String(plainTextBytes);
+            xDocXAdES.Save(path + "VerifyXAdES_" + file);
+
+            xDocXAdESWithSignedReport.LoadXml(XAdESWithSignedReport);
+            XmlElement xRootXAdESWithSignedReport = xDocXAdESWithSignedReport.DocumentElement;
+            xRootXAdESWithSignedReport["soapenv:Body"]["esv:VerifyXAdESWithSignedReport"]["esv:message"].InnerXml = System.Convert.ToBase64String(plainTextBytes);
+            xDocXAdESWithSignedReport.Save(path + "VerifyXAdES_withSignedReport_" + file);
+
+        }
+
         private void SourceFileButton_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog FBD = new FolderBrowserDialog();
             if (FBD.ShowDialog() == DialogResult.OK)
             {
                 SourceFileTextBox.Text = FBD.SelectedPath;
+                int count = System.IO.Directory.GetFiles(FBD.SelectedPath).Length;
+                endLabel.Text = count.ToString();
+                SubscribeProgressBar.Maximum = count;
+                SubscribeProgressBar.Value = 0;
             }
         }
 
@@ -326,6 +386,20 @@ namespace SignatureMaker.XAdES
             if (FBD.ShowDialog() == DialogResult.OK)
             {
                 saveFileTextBox.Text = FBD.SelectedPath;
+            }
+        }
+
+        private void TSACheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.TSACheckBox.Checked)
+            {
+                this.TimestampURITextBox.ReadOnly = false;
+                this.SignatureTimestampIDTextBox.ReadOnly = false;
+            }
+            else
+            {
+                this.TimestampURITextBox.ReadOnly = true;
+                this.SignatureTimestampIDTextBox.ReadOnly = true;
             }
         }
     }
