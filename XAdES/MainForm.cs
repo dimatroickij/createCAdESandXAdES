@@ -307,13 +307,13 @@ namespace SignatureMaker.XAdES
                 {
                     if (xades)
                     {
-                        transformXML(_envelopedSignatureXmlDocument, saveFileTextBox.Text + "\\", name, "VerifyXMLSignature");
-                        transformXML(_envelopedSignatureXmlDocument, saveFileTextBox.Text + "\\", name, "VerifyXMLSignatureWithSignedReport");
+                        transformXML(_envelopedSignatureXmlDocument, saveFileTextBox.Text + "\\", name, "VerifyXML_simple_");
+                        transformXML(_envelopedSignatureXmlDocument, saveFileTextBox.Text + "\\", name, "VerifyXML_withSignedReport_");
                     }
                     else
                     {
-                        transformXML(_envelopedSignatureXmlDocument, saveFileTextBox.Text + "\\", name, "VerifyXAdES");
-                        transformXML(_envelopedSignatureXmlDocument, saveFileTextBox.Text + "\\", name, "VerifyXAdESWithSignedReport");
+                        transformXML(_envelopedSignatureXmlDocument, saveFileTextBox.Text + "\\", name, "VerifyXAdES_simple_");
+                        transformXML(_envelopedSignatureXmlDocument, saveFileTextBox.Text + "\\", name, "VerifyXAdES_withSignedReport_");
                     }
                 }
                 else
@@ -348,7 +348,7 @@ namespace SignatureMaker.XAdES
                     }
                     catch (Exception)
                     {
-                        Thread.Sleep(1000);
+                        Thread.Sleep(2000);
                         tsaResponsePkiStatus = httpTsaClient.ParseTsaResponse();
                     }
                     if (tsaResponsePkiStatus == KnownTsaResponsePkiStatus.Granted)
@@ -390,25 +390,29 @@ namespace SignatureMaker.XAdES
         {
             XmlDocument xDoc = new XmlDocument();
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(xml.InnerXml);
-
+            var type2 = "";
             switch (type)
             {
-                case "VerifyXAdES":
+                case "VerifyXAdES_simple_":
                     xDoc.LoadXml(XAdES);
+                    type2 = "VerifyXAdES";
                     break;
-                case "VerifyXAdESWithSignedReport":
+                case "VerifyXAdES_withSignedReport_":
                     xDoc.LoadXml(XAdESWithSignedReport);
+                    type2 = "VerifyXAdESWithSignedReport";
                     break;
-                case "VerifyXMLSignature":
+                case "VerifyXML_simple_":
                     xDoc.LoadXml(XMLDSig);
-                    break;
-                case "VerifyXMLSignatureWithSignedReport":
+                    type2 = "VerifyXMLSignature";
+                    break; ;
+                case "VerifyXML_withSignedReport_":
+                    type2 = "VerifyXMLSignatureWithSignedReport";
                     xDoc.LoadXml(XMLDSigWithSignedReport);
                     break;
             }
             XmlElement xRoot = xDoc.DocumentElement;
-            xRoot["soapenv:Body"]["esv:" + type]["esv:message"].InnerXml = System.Convert.ToBase64String(plainTextBytes);
-            xDoc.Save(path + type + "_" + file);
+            xRoot["soapenv:Body"]["esv:" + type2]["esv:message"].InnerXml = System.Convert.ToBase64String(plainTextBytes);
+            xDoc.Save(path + type + file);
         }
 
         private void SourceFileButton_Click(object sender, EventArgs e)
