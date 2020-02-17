@@ -29,5 +29,10 @@ namespace SignatureMaker
             form.ShowDialog();
             Close();
         }
+
+        private void CADeSButton_Click(object sender, EventArgs e)
+        {
+            OpenForm<CAdES.MainForm>();
+        }
     }
 }

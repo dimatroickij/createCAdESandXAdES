@@ -38,6 +38,7 @@
             resources.ApplyResources(this.CADeSButton, "CADeSButton");
             this.CADeSButton.Name = "CADeSButton";
             this.CADeSButton.UseVisualStyleBackColor = true;
+            this.CADeSButton.Click += new System.EventHandler(this.CADeSButton_Click);
             // 
             // XADeSButton
             // 

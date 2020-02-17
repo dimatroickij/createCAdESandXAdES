@@ -68,6 +68,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CAdES\Base64.cs" />
+    <Compile Include="CAdES\CertSelectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CAdES\CertSelectForm.designer.cs">
+      <DependentUpon>CertSelectForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CAdES\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CAdES\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +97,12 @@
     <Compile Include="XAdES\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CAdES\CertSelectForm.resx">
+      <DependentUpon>CertSelectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CAdES\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -112,9 +131,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CAdES\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>

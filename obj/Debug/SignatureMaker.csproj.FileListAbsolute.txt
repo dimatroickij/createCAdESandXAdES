@@ -68,3 +68,5 @@ C:\Users\d.troickiy\source\repos\createxades\obj\Debug\SignatureMaker.csproj.Gen
 C:\Users\d.troickiy\source\repos\createxades\obj\Debug\SignatureMaker.csproj.CopyComplete
 C:\Users\d.troickiy\source\repos\createxades\obj\Debug\SignatureMaker.exe
 C:\Users\d.troickiy\source\repos\createxades\obj\Debug\SignatureMaker.pdb
+C:\Users\d.troickiy\source\repos\createxades\obj\Debug\SignatureMaker.CAdES.MainForm.resources
+C:\Users\d.troickiy\source\repos\createxades\obj\Debug\SignatureMaker.WinForm.Cades.CertSelectForm.resources
