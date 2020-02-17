@@ -34,7 +34,10 @@ namespace SignatureMaker.XAdES
         string XMLDSigWithSignedReport = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:esv=\"http://esv.server.rt.ru\">" +
             "<soapenv:Header/><soapenv:Body><esv:VerifyXMLSignatureWithSignedReport><esv:message></esv:message><esv:verifySignatureOnly>false</esv:verifySignatureOnly>" +
             "</esv:VerifyXMLSignatureWithSignedReport></soapenv:Body></soapenv:Envelope>";
-
+        string csvXAdES = "VerifyXAdES_simple.csv";
+        string csvXAdESSignedReport = "VerifyXAdES_withSignedReport.csv";
+        string csvXML = "VerifyXML_simple.csv";
+        string csvXMLSignedReport = "VerifyXML_withSignedReport.csv";
         public MainForm()
         {
             InitializeComponent();
@@ -137,6 +140,28 @@ namespace SignatureMaker.XAdES
                 {
                     if (XAdESRadioButton.Checked || ((TimestampURITextBox.Text != "") && (SignatureTimestampIDTextBox.Text != "")))
                     {
+                        if (XAdESRadioButton.Checked)
+                        {
+                            using (StreamWriter writer = new StreamWriter(new FileStream(saveFileTextBox.Text + "\\" + csvXML, FileMode.Create, FileAccess.Write)))
+                            {
+                                writer.WriteLine("file,response");
+                            }
+                            using (StreamWriter writer = new StreamWriter(new FileStream(saveFileTextBox.Text + "\\" + csvXMLSignedReport, FileMode.Create, FileAccess.Write)))
+                            {
+                                writer.WriteLine("file,response");
+                            }
+                        }
+                        else
+                        {
+                            using (StreamWriter writer = new StreamWriter(new FileStream(saveFileTextBox.Text + "\\" + csvXAdES, FileMode.Create, FileAccess.Write)))
+                            {
+                                writer.WriteLine("file,response");
+                            }
+                            using (StreamWriter writer = new StreamWriter(new FileStream(saveFileTextBox.Text + "\\" + csvXAdESSignedReport, FileMode.Create, FileAccess.Write)))
+                            {
+                                writer.WriteLine("file,response");
+                            }
+                        }
                         SubscribeProgressBar.Value = 0;
                         IEnumerable<string> allfiles = Directory.EnumerateFiles(SourceFileTextBox.Text);
                         Thread t = new Thread(new ThreadStart(delegate
@@ -307,13 +332,14 @@ namespace SignatureMaker.XAdES
                 {
                     if (xades)
                     {
-                        transformXML(_envelopedSignatureXmlDocument, saveFileTextBox.Text + "\\", name, "VerifyXML_simple_");
-                        transformXML(_envelopedSignatureXmlDocument, saveFileTextBox.Text + "\\", name, "VerifyXML_withSignedReport_");
+                        transformXML(_envelopedSignatureXmlDocument, saveFileTextBox.Text + "\\", name, "VerifyXML_simple");
+                        transformXML(_envelopedSignatureXmlDocument, saveFileTextBox.Text + "\\", name, "VerifyXML_withSignedReport");
+                        
                     }
                     else
                     {
-                        transformXML(_envelopedSignatureXmlDocument, saveFileTextBox.Text + "\\", name, "VerifyXAdES_simple_");
-                        transformXML(_envelopedSignatureXmlDocument, saveFileTextBox.Text + "\\", name, "VerifyXAdES_withSignedReport_");
+                        transformXML(_envelopedSignatureXmlDocument, saveFileTextBox.Text + "\\", name, "VerifyXAdES_simple");
+                        transformXML(_envelopedSignatureXmlDocument, saveFileTextBox.Text + "\\", name, "VerifyXAdES_withSignedReport");
                     }
                 }
                 else
@@ -393,26 +419,41 @@ namespace SignatureMaker.XAdES
             var type2 = "";
             switch (type)
             {
-                case "VerifyXAdES_simple_":
+                case "VerifyXAdES_simple":
                     xDoc.LoadXml(XAdES);
                     type2 = "VerifyXAdES";
                     break;
-                case "VerifyXAdES_withSignedReport_":
+                case "VerifyXAdES_withSignedReport":
                     xDoc.LoadXml(XAdESWithSignedReport);
                     type2 = "VerifyXAdESWithSignedReport";
                     break;
-                case "VerifyXML_simple_":
+                case "VerifyXML_simple":
                     xDoc.LoadXml(XMLDSig);
                     type2 = "VerifyXMLSignature";
                     break; ;
-                case "VerifyXML_withSignedReport_":
+                case "VerifyXML_withSignedReport":
                     type2 = "VerifyXMLSignatureWithSignedReport";
                     xDoc.LoadXml(XMLDSigWithSignedReport);
                     break;
             }
             XmlElement xRoot = xDoc.DocumentElement;
             xRoot["soapenv:Body"]["esv:" + type2]["esv:message"].InnerXml = System.Convert.ToBase64String(plainTextBytes);
-            xDoc.Save(path + type + file);
+            xDoc.Save(path + type + "_" + file);
+
+            if (XAdESRadioButton.Checked)
+            {
+                using (StreamWriter writer = new StreamWriter(new FileStream(saveFileTextBox.Text + "\\" + type + ".csv", FileMode.Append, FileAccess.Write)))
+                {
+                    writer.WriteLine(type + "_" + file + ",<Code>0</Code>");
+                }
+            }
+            else
+            {
+                using (StreamWriter writer = new StreamWriter(new FileStream(saveFileTextBox.Text + "\\" + type + ".csv", FileMode.Append, FileAccess.Write)))
+                {
+                    writer.WriteLine(type + "_" + file + ",<Code>0</Code>");
+                }
+            }
         }
 
         private void SourceFileButton_Click(object sender, EventArgs e)
