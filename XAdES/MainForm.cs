@@ -65,7 +65,7 @@ namespace SignatureMaker.XAdES
 
                 if (_chain.Build(_certificate) == true)
                 {
-                    this.CertificateDetailsLabel.Text = _certificate.SubjectName.Name + _certificate.IssuerName.Name;
+                    this.CertificateDetailsLabel.Text = _certificate.SubjectName.Name + _certificate.IssuerName.Name + "\n" + _certificate.SerialNumber;
 
                     //issuerSerialLabel.Text = _certificate.SerialNumber;
 
